@@ -1,0 +1,5 @@
+name: ML_HW1
+description: A sample command-line application
+dev_dependencies:
+#  unittest: any
+  args: any

@@ -1,0 +1,10 @@
+name: pla_r4
+version: 1.0.0
+authors:
+- abby yeh <radleaf@gmail
+- com>
+description: A little libarary of pla and pocket algorithm of R^4
+environment:
+  sdk: '>=1.4.0'
+dev_dependencies:
+  args: any

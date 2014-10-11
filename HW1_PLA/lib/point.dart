@@ -1,12 +1,7 @@
-library ml_hw1.point;
+library ml_pla.point;
 
-int getY(Point p, Weight w) {
-  double side = w.w1 * p.x1 + w.w2 * p.x2 + w.w3 * p.x3 + w.w4 * p.x4;
-  if (side > 0.0)
-    return 1;
-  return -1;
-}
 class Point {
+  double x0 = 1.0;
   double x1;
   double x2;
   double x3;
@@ -28,19 +23,18 @@ class Point {
       print('error: out of range');
       return -1.0;
   }
-  String toString() => 'point: ($x1, $x2, $x3, $x4, $y)';
+  
+  String toString() => 'point: ($x0, $x1, $x2, $x3, $x4, $y)';
 }
 
 class Weight {
-  double w0; // -threshold
+  double w0;
   double w1;
   double w2;
   double w3;
   double w4;
   
-  Weight(this.w1, this.w2, this.w3, this.w4, [double threshold = 0.0]) {
-    w0 = 0 - threshold;
-  }
+  Weight(this.w1, this.w2, this.w3, this.w4, {this.w0: 0.0});
   
   double operator[](int index) {
     if (index == 0)
@@ -56,13 +50,9 @@ class Weight {
       return -1.0;
   }
   
-  add(Point p, int direct)
-    => new Weight(
-    w1 + direct * p.x1,
-    w2 + direct * p.x2,
-    w3 + direct * p.x3,
-    w4 + direct * p.x4
-    );
+  add(Point p, [double scale = 1.0])
+    => new Weight(w1 + p.y * p.x1 * scale, w2 + p.y * p.x2 * scale, w3 + p.y * p.x3 * scale,
+        w4 + p.y * p.x4 * scale, w0: w0 + p.y * p.x0 * scale);
   
-  String toString() => 'weight: ($w1, $w2, $w3, $w4)';
+  String toString() => 'weight: ($w0, $w1, $w2, $w3, $w4)';
 }

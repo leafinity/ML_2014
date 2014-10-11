@@ -1,0 +1,10 @@
+*.local
+*.dart.js.deps
+*.precompiled.js
+*.tmp
+packages
+packages/
+pubspec.lock
+*.dat.text
+build
+build/

@@ -1,0 +1,8 @@
+name: decision_stump
+version: 1.0.0
+author: abby yeh <radleaf@gmail.com>
+description: A little libarary of decision stump algorithm of muti-dimension
+environment:
+  sdk: '>=1.4.0'
+dev_dependencies:
+  args: any

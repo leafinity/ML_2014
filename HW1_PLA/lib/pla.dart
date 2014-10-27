@@ -1,7 +1,7 @@
 library ml_pla.pla;
 
 import 'dart:math' show Random;
-import "package:PLA/point.dart";
+import "point.dart";
 
 part 'pla_src/util.dart';
 

@@ -20,8 +20,7 @@ class Point {
     else if(index == 3)
       return x4;
     else 
-      print('error: out of range');
-      return -1.0;
+      throw new StateError('out of range');
   }
   
   String toString() => 'point: ($x0, $x1, $x2, $x3, $x4, $y)';
@@ -46,8 +45,7 @@ class Weight {
     else if(index == 3)
       return w4;
     else 
-      print('error: out of range');
-      return -1.0;
+      throw new StateError('out of range');
   }
   
   add(Point p, [double scale = 1.0])

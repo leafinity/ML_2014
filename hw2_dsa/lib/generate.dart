@@ -16,12 +16,17 @@ List<Point1> generateOneDimensionData(int size, [int noise = 0]) {
     double value = ran.nextDouble();
     
     int sign = postive == true? 1: -1;
-    
-    int mod = 100 ~/ noise;
-    if (i % mod == 0)
-      data.add(new Point1([sign * value], sign * -1));
-    else
+ 
+    if (noise != 0) {
+      int mod = 100 ~/ noise;
+      if (i % mod == 0)
+        data.add(new Point1([sign * value], sign * -1));
+      else
+        data.add(new Point1([sign * value], sign));
+    } else {
       data.add(new Point1([sign * value], sign));
+    }
+    
   }
   
   return data;

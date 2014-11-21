@@ -1,0 +1,6 @@
+name: hw3_logistic_regression
+description: A sample command-line application
+environment:
+  sdk: '>=1.4.0'
+dev_dependencies:
+  args: any

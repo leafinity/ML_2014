@@ -7,3 +7,7 @@
 ###HW2
 *	Decision Stump Algorithm of One Dimension
 *	Decision Stump Algorithm of Muti-dimension
+
+###HW3
+*	Linear Regression by pseudo inverse(in c++)
+*	Logistic Regression

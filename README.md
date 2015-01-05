@@ -11,3 +11,6 @@
 ###HW3
 *	Linear Regression by pseudo inverse(in c++)
 *	Logistic Regression
+
+###HW6
+*	AdaBoost with Decision Stumps

@@ -12,12 +12,3 @@ class Point {
   String toString() => 'point: ($_x, $y)';
   
 }
-
-class AdaboostTrainData {
-  
-  Point point;
-  double weight;
-  
-  AdaboostTrainData(this.point, this.weight);
-  String toString() => 'p: ${point.getX(1)}';
-}

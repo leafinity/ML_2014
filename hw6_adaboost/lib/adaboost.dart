@@ -24,15 +24,16 @@ AdaboostModel adaboostTrain(List<Point> trainData, int dimensions, int iteration
   adaboostModel.alphas = new List(iterations);
   
   int datalen = trainData.length;
-  List<double> u = new List.filled(datalen, 1 / datalen); //u(1) = [1/N, ... , 1/N]
+  List<AdaboostTrainData> adaTrainData 
+    = new List.generate(datalen, (i) => new AdaboostTrainData(trainData[i], 1/datalen));
   
   //boostiog
   for (int t = 0; t < iterations; t++) {
     //get classifier[t]
-    DsaReturn dsaModel = dsaMutiDimension(trainData, u, dimensions);
+    DsaReturn dsaModel = dsaMutiDimension(new List.from(adaTrainData, growable: false), dimensions);
     
     if(doPrint)
-      print('U($t): ${u.fold(0, (prev, element) => prev + element)}');
+      print('U($t): ${adaTrainData.fold(0, (prev, element) => prev + element.weight)}');
     
     //update u
     double errorT = dsaModel.errorRate;
@@ -40,32 +41,28 @@ AdaboostModel adaboostTrain(List<Point> trainData, int dimensions, int iteration
       print('g($t): $errorT');
     
     double scalingFactor = pow((1 - errorT) / errorT, 1/2);
-//    print('errorT: $errorT, scalingFactor: $scalingFactor');
     for (int i = 0; i < datalen; i++) {
       //incorrect <-- incorrect * scaling
-      if(dsaPredict(dsaModel, trainData[i]) != trainData[i].y)
-        u[i] *= scalingFactor;
+      if(dsaPredict(dsaModel, adaTrainData[i].point) != adaTrainData[i].point.y)
+        adaTrainData[i].weight *= scalingFactor;
       //correct <-- correct / scaling
       else
-        u[i] /= scalingFactor;
+        adaTrainData[i].weight /= scalingFactor;
     }
     
     //save classifier and its weight
     adaboostModel.classifiers[t] = dsaModel;
     adaboostModel.alphas[t] = log(scalingFactor);
-    adaboostModel.dataWeights = u;
     
     if(doPrint) {
       print('alpha($t): ${adaboostModel.alphas[t]}');
       AdaboostPrediction predict_in = adaboostPredict(adaboostModel, trainData);
-      print('Ein(Gt): ${predict_in.errRate}');
+      print('Ein($t): ${predict_in.errRate}');
       AdaboostPrediction predict_out = adaboostPredict(adaboostModel, testData);
-      print('Eout(Gt): ${predict_out.errRate}');
+      print('Eout($t): ${predict_out.errRate}');
     }
-      
-    if (errorT == 0.0)
-      break;
   }
+  adaboostModel.dataWeights = new List.generate(datalen, (i) => adaTrainData[i].weight);
   return adaboostModel;
 }
 

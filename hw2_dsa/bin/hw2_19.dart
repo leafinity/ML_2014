@@ -1,7 +1,7 @@
 library ml_hw2.dsa19;
 
 import 'package:decision_stump/arg.dart';
-import 'package:decision_stump/train_data.dart';
+import '../../../hw6_adaboost/lib/train_data.dart';
 import 'package:decision_stump/point.dart';
 import 'package:decision_stump/dsa.dart';
 
